@@ -23,6 +23,11 @@
     <script>
         $(document).ready(function(){
 
+            // 사용자 데이터
+            const data = {
+                name: ''
+            };
+
             // 다음 버튼
             // $('.cus-next-btn > a').on('click', function() {
             //     alert(1)
@@ -31,12 +36,22 @@
             // 텍스트 필드
             $('.form-text input[type=text]').on('keydown', function(e) {
                 let keyCode = e.keyCode;
+                let name = e.target.value;
+
+                // 데이터 셋팅
+                data.name = name;
 
                 // Enter 클릭시 다음 페이지
                 if (keyCode === 13) {
                     location.href = "#subPage";
+                    setData('.js-name', data.name);
+
                 }
             });
+
+            function setData(target, value) {
+                $(target).text(value);
+            }
             
             // 이벤트 트리거
             // $('.cus-next-btn').trigger('click');
@@ -73,9 +88,6 @@
                 <div class="cus-next-btn">
                     <a href="#mainPage">다음</a>
                 </div>
-            </div>
-            <div data-role="footer">
-                <h1>Footer</h1>
             </div>
         </div>
     </div>
