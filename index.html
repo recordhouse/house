@@ -17,6 +17,7 @@
     <script src="./common/js/jquery.mobile-1.4.5.min.js"></script>
 
     <!-- style -->
+    <link rel="stylesheet" href="./common/css/reset.css">
     <link rel="stylesheet" href="./common/css/style.css">
 </head>
 <body>
@@ -27,14 +28,15 @@
                 <h1>mainPage Header</h1>
             </div>
             <div data-role="content">
-                <h1>mainPage Content</h1>
-                <p>
-                    <a href="#subPage">subPage로 이동</a>
-                </p>
+                <h1>당신의 이름을 적어주세요</h1>
+                <div class="form-text">
+                    <input type="text" />
+                </div>
+                <div class="cus-next-btn">
+                    <a href="#subPage">다음</a>
+                </div>
             </div>
-            <div data-role="footer">
-                <h1>Footer</h1>
-            </div>
+            <!-- <div data-role="footer"><h1>Footer</h1></div> -->
         </div>
  
         <div data-role="page" id="subPage">
@@ -43,9 +45,10 @@
             </div>
             <div data-role="content">
                 <h1>subPage Content</h1>
-                <p>
-                    <a href="#mainPage">mainPage로 이동</a>
-                </p>
+
+                <div class="cus-next-btn">
+                    <a href="#mainPage">다음</a>
+                </div>
             </div>
             <div data-role="footer">
                 <h1>Footer</h1>
