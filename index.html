@@ -19,13 +19,37 @@
     <!-- style -->
     <link rel="stylesheet" href="./common/css/reset.css">
     <link rel="stylesheet" href="./common/css/style.css">
+
+    <script>
+        $(document).ready(function(){
+
+            // 다음 버튼
+            // $('.cus-next-btn > a').on('click', function() {
+            //     alert(1)
+            // });
+
+            // 텍스트 필드
+            $('.form-text input[type=text]').on('keydown', function(e) {
+                let keyCode = e.keyCode;
+
+                // Enter 클릭시 다음 페이지
+                if (keyCode === 13) {
+                    location.href = "#subPage";
+                }
+            });
+            
+            // 이벤트 트리거
+            // $('.cus-next-btn').trigger('click');
+
+        });
+    </script>
 </head>
 <body>
     <div class="wrap">
         
         <div data-role="page" id="mainPage">
             <div data-role="header">
-                <h1>mainPage Header</h1>
+                <h1>평균 구하기</h1>
             </div>
             <div data-role="content">
                 <h1>당신의 이름을 적어주세요</h1>
@@ -41,7 +65,7 @@
  
         <div data-role="page" id="subPage">
             <div data-role="header">
-                <h1>subPage Header</h1>
+                <h1><span class="js-name"></span>님</h1>
             </div>
             <div data-role="content">
                 <h1>subPage Content</h1>
