@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+
+    <!-- old -->
+    <!-- <script src="./common/js/jquery-3.4.1.min.js"></script>
+    <script src="./common/js/jquery-ui.min.js"></script>
+    <script src="./common/js/main.js"></script> -->
+
+    <!-- jquery mobile -->
+    <link rel="stylesheet" href="./common/css/jquery.mobile-1.4.5.min.css" />
+    <script src="./common/js/jquery-1.11.1.min.js"></script>
+    <script src="./common/js/jquery.mobile-1.4.5.min.js"></script>
+
+    <!-- style -->
+    <link rel="stylesheet" href="./common/css/style.css">
+</head>
+<body>
+    <div class="wrap">
+        
+        <div data-role="page" id="mainPage">
+            <div data-role="header">
+                <h1>mainPage Header</h1>
+            </div>
+            <div data-role="content">
+                <h1>mainPage Content</h1>
+                <p>
+                    <a href="#subPage">subPage로 이동</a>
+                </p>
+            </div>
+            <div data-role="footer">
+                <h1>Footer</h1>
+            </div>
+        </div>
+ 
+        <div data-role="page" id="subPage">
+            <div data-role="header">
+                <h1>subPage Header</h1>
+            </div>
+            <div data-role="content">
+                <h1>subPage Content</h1>
+                <p>
+                    <a href="#mainPage">mainPage로 이동</a>
+                </p>
+            </div>
+            <div data-role="footer">
+                <h1>Footer</h1>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
