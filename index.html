@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
@@ -21,85 +22,242 @@
     <link rel="stylesheet" href="./common/css/style.css">
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
+
+            const $formEl = $('.question-content').children('.question-box');
+            const $inputTextEl = $formEl.find('input[type=text]');
+            const $inputRadioEl = $formEl.find('input[type=radio]');
+            const $nextBtn = $('.js-next-btn');
+            const $finishName = $('.js-finish-name');
+
+            let countInx = 0;
 
             // 사용자 데이터
             const data = {
-                name: ''
+                name: '',
+                age: 0,
+                height: 0,
+                weight: 0
             };
 
-            // 다음 버튼
-            // $('.cus-next-btn > a').on('click', function() {
-            //     alert(1)
-            // });
+            // 초기화
+            init();
+            initEvent();
 
-            // 텍스트 필드
-            $('.form-text input[type=text]').on('keydown', function(e) {
-                let keyCode = e.keyCode;
-                let name = e.target.value;
+            /** 초기화 */
+            function init() {
 
-                // 데이터 셋팅
-                data.name = name;
-
-                // Enter 클릭시 다음 페이지
-                if (keyCode === 13) {
-                    location.href = "#subPage";
-                    setData('.js-name', data.name);
-
-                }
-            });
-
-            function setData(target, value) {
-                $(target).text(value);
+                // 포커스 처리
+                $formEl.eq(0).find('input').focus();
             }
-            
-            // 이벤트 트리거
-            // $('.cus-next-btn').trigger('click');
+
+            /** 이벤트 초기화 */
+            function initEvent() {
+
+                // 텍스트 필드
+                $inputTextEl.on('keydown', function (e) {
+                    let keyCode = e.keyCode;
+                    let name = e.target.value;
+
+                    // Enter 클릭시 다음 페이지
+                    if (keyCode === 13) {
+
+                        // 정합성 체크
+                        if (!checkValue()) {
+                            return;
+                        }
+                        nextProcess();
+                    }
+                });
+
+                // 라디오 버튼
+                // $inputRadioEl.on('click', function (e) {
+                //     nextProcess();
+                // });
+
+                // 다음 버튼
+                $nextBtn.on('click', function (e) {
+
+                    // 정합성 체크
+                    if (!checkValue()) {
+                        return;
+                    }
+                    nextProcess();
+                });
+
+                // 질문 건너뛰기 버튼
+                $('.js-pass-btn').on('click', function (e) {
+                    nextProcess();
+                });
+            }
+
+            /** 결과 초기화 */
+            function initFinish() {
+
+            }
+
+            /**
+             * 다음 프로세스
+             * @category 모션
+             */
+            function nextProcess() {
+
+                // 인덱스 업데이트
+                updateIdx('next');
+
+                // 다음 질문
+                nextQuestion();
+
+                // 마지막 질문이면
+                if (countInx === $formEl.length) {
+                    $nextBtn.text('결과확인하기').addClass('active').focus();
+
+                // 결과 확인하기
+                } else if (countInx > $formEl.length + 1) {
+
+                    // 데이터 저장
+                    saveData();
+
+                    console.log(data);
+
+                    // 결과 페이지
+                    location.href = "#finishPage";
+
+                    // 결과 페이지 초기화
+                    initFinish();
+                }
+            }
+
+            /**
+             * 다음 질문 보이기
+             * @category 모션
+             * @param {string}
+             */
+            function updateIdx(str) {
+                if (str === 'next') {
+                    countInx++;
+                } else {
+                    countInx--;
+                }
+            }
+
+            /**
+             * 다음 질문 보이기
+             * @category 모션
+             */
+            function nextQuestion() {
+                $formEl.eq(countInx).addClass('on').find('input').eq(0).focus();
+                $formEl.eq(countInx - 1).addClass('off').removeClass('on').find('input').attr('disabled', true);
+            }
+
+            /**
+             * 사용자 정보 셋팅
+             * @category 데이터
+             */
+            function saveData() {
+                data.name = $('.js-fotm-name').val();
+                data.age = $('.js-fotm-age').val();
+                data.height = $('.js-fotm-height').val();
+                data.weight = $('.js-fotm-weight').val();
+            }
+
+            /**
+             * 정합성 체크
+             * @category 정합성
+             */
+            function checkValue() {
+                const value = $formEl.eq(countInx).find('input').val();
+
+                // 빈값이면
+                if (value === '') {
+                    alert('값을 확인해주세요');
+                    $formEl.eq(countInx).find('input').focus();
+                    return false;
+                }
+                return true;
+            }
 
         });
     </script>
 </head>
+
 <body>
     <div class="wrap">
-        
+
         <div data-role="page" id="mainPage">
             <div data-role="header">
                 <h1>평균 구하기</h1>
             </div>
             <div data-role="content">
-                <h1>당신의 이름을 적어주세요</h1>
-                <div class="form-text">
-                    <input type="text" />
-                </div>
-                <div class="cus-next-btn">
-                    <a href="#subPage">다음</a>
-                </div>
-                <div data-role="rangeslider" data-mini="true">
-                    <label for="range-4a">키를 알려주세요</label>
-                    <input type="range" name="range-4a" id="range-4a" min="0" max="100" value="0">
-                    <label for="range-4b">Rangeslider:</label>
-                    <input type="range" name="range-4b" id="range-4b" min="0" max="200" value="100">
-                </div>
-                
-            </div>
-            <!-- <div data-role="footer"><h1>Footer</h1></div> -->
-        </div>
  
-        <div data-role="page" id="subPage">
+                <!-- question -->
+                <div class="question-content">
+                    <div class="question-box on">
+                        <h2>이름이 뭔가요?</h2>
+                        <div class="form-text">
+                            <input type="text" class="js-fotm-name" title="이름" placeholder="예: 홍길동" />
+                        </div>
+                    </div>
+                    <div class="question-box">
+                        <h2>성별이 뭔가요?</h2>
+                        <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
+                            <legend></legend>
+                            <input type="radio" name="radio01" id="radio01-01" value="male">
+                            <label for="radio01-01">남성</label>
+                            <input type="radio" name="radio01" id="radio01-02" value="female">
+                            <label for="radio01-02">여성</label>
+                        </fieldset>
+                    </div>
+                    <div class="question-box">
+                        <h2>나이를 알려주세요</h2>
+                        <div class="form-text age">
+                            <input type="text" class="js-fotm-age" title="나이" placeholder="숫자 입력"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                        </div>
+                    </div>
+                    <div class="question-box">
+                        <h2>키를 알려주세요</h2>
+                        <div class="form-text height">
+                            <input type="text" class="js-fotm-height" title="키" placeholder="숫자 입력"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                        </div>
+                    </div>
+                    <div class="question-box">
+                        <h2>몸무게를 알려주세요</h2>
+                        <div class="form-text weight">
+                            <input type="text" class="js-fotm-weight" title="몸무게" placeholder="숫자 입력"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- button -->
+                <div class="cus-next-btn type02">
+                    <div class="btn-wrap">
+                        <button type="button" class="js-pass-btn">질문건너뛰기</button>
+                    </div>
+                    <div class="btn-wrap">
+                        <button type="button" class="js-next-btn">다음</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div data-role="page" id="finishPage">
             <div data-role="header">
-                <h1><span class="js-name"></span>님</h1>
+                <h1><span class="js-finish-name"></span>님</h1>
             </div>
             <div data-role="content">
-                <h1>subPage Content</h1>
-
+                <h1>finishPage Content</h1>
                 <div class="cus-next-btn">
                     <a href="#mainPage">다음</a>
                 </div>
             </div>
         </div>
     </div>
-
+    
 </body>
-</html>
 
+</html>
 
