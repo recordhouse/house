@@ -1,6 +1,14 @@
 @charset "utf-8";
 
+
+
 /* custom style */
+
+.ui-page {
+    box-sizing: content-box;
+    padding-bottom: 70px;
+}
+
 .cus-next-btn {
     position: fixed;
     left: 0;

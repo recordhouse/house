@@ -113,7 +113,7 @@
                     $nextBtn.text('결과확인하기').addClass('active').focus();
 
                 // 결과 확인하기
-                } else if (countInx > $formEl.length + 1) {
+                } else if (countInx > $formEl.length) {
 
                     // 데이터 저장
                     saveData();
@@ -202,7 +202,7 @@
                         <h2>성별이 뭔가요?</h2>
                         <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
                             <legend></legend>
-                            <input type="radio" name="radio01" id="radio01-01" value="male">
+                            <input type="radio" name="radio01" id="radio01-01" value="male" checked="checked">
                             <label for="radio01-01">남성</label>
                             <input type="radio" name="radio01" id="radio01-02" value="female">
                             <label for="radio01-02">여성</label>
@@ -256,7 +256,7 @@
             </div>
         </div>
     </div>
-    
+
 </body>
 
 </html>
