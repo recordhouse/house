@@ -3,6 +3,10 @@
 
 
 /* custom style */
+.ui-page-theme-a {
+    background: none;
+    
+}
 
 .ui-page {
     box-sizing: content-box;
