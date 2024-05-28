@@ -39,6 +39,7 @@
             // 사용자 데이터
             const data = {
                 name: '',
+                gender: '',
                 age: 0,
                 height: 0,
                 weight: 0
@@ -112,11 +113,13 @@
                 // 다음 질문
                 nextQuestion();
 
+                console.log(countInx);
+
                 // 마지막 질문이면
                 if (countInx === $formEl.length) {
                     $nextBtn.text('결과확인하기').addClass('active').focus();
 
-                // 결과 확인하기
+                    // 결과 확인하기
                 } else if (countInx > $formEl.length) {
 
                     // 데이터 저장
@@ -160,6 +163,7 @@
              */
             function saveData() {
                 data.name = $('.js-fotm-name').val();
+                data.gender = $('input[name=radio01]').val();
                 data.age = $('.js-fotm-age').val();
                 data.height = $('.js-fotm-height').val();
                 data.weight = $('.js-fotm-weight').val();
@@ -187,13 +191,12 @@
 
 <body>
     <div class="wrap">
-
         <div data-role="page" id="mainPage">
             <div data-role="header">
                 <h1>평균 구하기</h1>
             </div>
             <div data-role="content">
- 
+
                 <!-- question -->
                 <div class="question-content">
                     <div class="question-box on">
@@ -264,4 +267,3 @@
 </body>
 
 </html>
-
